@@ -99,7 +99,7 @@ Menu
 Hero
 -----------------*/
 .hero {
-    background: url("../img/photos/photo4.jpg") no-repeat center center;
+    background: url("../img/photos/header.jpg") no-repeat center center;
     background-size: cover;
     height: 60vh;
     margin-bottom: 1rem;
@@ -151,11 +151,31 @@ Modals
     font-weight: 700;
 }
 .reveal-modal .info .avatar {
+  background: url("../img/avatars/Avatar_Sprite75x75.jpg") no-repeat center center;
     border-radius: 50%;
     float: left;
     height: 75px;
     margin-right: 1rem;
     width: 75px;
+}
+
+.reveal-modal .info .two {
+  background-position-x: -75px;
+}
+.reveal-modal .info .three {
+  background-position-x: -150px;
+}
+.reveal-modal .info .four {
+  background-position-x: -225px;
+}
+.reveal-modal .info .five {
+  background-position-x: -300px;
+}
+.reveal-modal .info .six {
+  background-position-x: -375px;
+}
+.reveal-modal .info .seven {
+  background-position-x: -450px;
 }
 
 /*---------------
