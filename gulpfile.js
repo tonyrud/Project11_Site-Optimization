@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 gulp.task('reload', function(done){
   gulp.start('concatScripts');
   gulp.start('concatCss');
-  browserSync.reload();
+  // browserSync.reload();
   done();
 });
 
