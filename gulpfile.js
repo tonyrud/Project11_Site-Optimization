@@ -4,13 +4,16 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
+    uglifyCss = require('gulp-uglifycss'),
     rename = require('gulp-rename');
 
 /*-------------------
   Reload Browser
 ---------------------*/
 //run concat, then reload the page
-gulp.task('reload',['concatCss'], function(done){
+gulp.task('reload', function(done){
+  gulp.start('concatScripts');
+  gulp.start('concatCss');
   browserSync.reload();
   done();
 });
@@ -19,7 +22,7 @@ gulp.task('reload',['concatCss'], function(done){
 Concat functions
 ---------------------*/
 
-gulp.task('concatScripts', ['concatCss'], function(){
+gulp.task('concatScripts', function(){
   return gulp.src([
     'js/jquery.js',
     'js/fastclick.js',
@@ -28,7 +31,12 @@ gulp.task('concatScripts', ['concatCss'], function(){
     'js/foundation.reveal.js'
   ])
   .pipe(concat('app.js'))
-  .pipe(gulp.dest('js'));
+  .pipe(gulp.dest('js'))
+  //minify scripts
+  .pipe(uglify())
+  .pipe(rename('app.min.js'))
+  .pipe(gulp.dest('js'));;
+
 });
 
 gulp.task('concatCss', function(){
@@ -38,21 +46,10 @@ gulp.task('concatCss', function(){
     'css/basics.css'
   ])
   .pipe(concat('main.css'))
-  .pipe(gulp.dest('css'));
-});
-
-/*-------------------
-Minify
----------------------*/
-gulp.task('minify', ['concatScripts'], function(){
-  gulp.src('js/app.js')
-  .pipe(uglify())
-  .pipe(rename('app.min.js'))
-  .pipe(gulp.dest('js'));
-
-  gulp.src('css/main.css')
-  .pipe(uglify())
+  .pipe(gulp.dest('css'))
+    //minify css
   .pipe(rename('main.min.css'))
+  .pipe(uglifyCss())
   .pipe(gulp.dest('css'));
 });
 
